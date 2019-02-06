@@ -15,3 +15,6 @@ login:
     path: '/login'
 register:
     path: '/register'
+
+change_passwd:
+    path: '/profile/change-password'
