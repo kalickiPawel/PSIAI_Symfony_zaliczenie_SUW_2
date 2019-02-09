@@ -9,12 +9,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
     public function indexAction(Request $request)
     {
-
-        return $this->render('default/index.html.twig');
+        $downloads = array(
+            "years" => 0,
+            "months" => 0,
+            "days" => 0,
+        );
+        return $this->render('default/index.html.twig', array(
+            'downloads' => $downloads,
+        ));
     }
 }

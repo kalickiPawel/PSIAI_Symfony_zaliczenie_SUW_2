@@ -1,3 +1,36 @@
-<div class="admin_content">
-    <b>I'm ADMIN</b>
-</div>
+{% trans_default_domain 'FOSUserBundle' %}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="profile">
+        <div class="text-center user_greatings">
+            <h1>Hello {{ user.username }}!</h1>
+        </div>
+
+        <div class="container">
+            <div class="row user_header">
+                <div class="col-sm-4">
+                    <div class="fos_user_user_show">
+                        <p><b>{{ 'profile.show.username'|trans }}</b>: {{ user.username }} | <a class="fas fa-wrench" href="{{ path('change_passwd') }}"> Change Password</a></p>
+                    </div>
+                </div>
+                
+                <div class="col-sm-4">
+                    <p><b>Your roles:</b> |
+                    {% for role in user.roles %}
+                        {{ role }} |
+                    {% endfor %}
+                    </p>
+                </div>
+        
+                <div class="col-sm-4">
+                    <p><b>{{ 'profile.show.email'|trans }}</b>: {{ user.email }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin_content">
+            I'm admin
+        </div>
+    </div>
+{% endblock %}

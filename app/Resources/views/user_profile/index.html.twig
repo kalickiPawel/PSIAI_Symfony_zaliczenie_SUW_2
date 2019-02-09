@@ -1,60 +1,96 @@
-<div class="user_content">
-    <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Wykłady</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">
-                    $0 <small class="text-muted">/ mo</small>
-                </h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>Matematyka</li>
-                    <li>PSIAI</li>
-                    <li>Geoinformatyka</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-success">
-                    Wybierz Wykład
-                </button>
-            </div>
-        </div>
-        <div class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Pliki</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">
-                    $0 <small class="text-muted">/ mo</small>
-                </h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>Matematyka</li>
-                    <li>PSIAI</li>
-                    <li>Geoinformatyka</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-success">
-                    Wybierz Plik
-                </button>
-            </div>
-        </div>
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="profile">
 
-        <div class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Kursy</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">
-                    $0 <small class="text-muted">/ mo</small>
-                </h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>Matematyka</li>
-                    <li>PSIAI</li>
-                    <li>Geoinformatyka</li>
-                </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-success">
-                    Wybierz Kurs
-                </button>
+    <div class="text-center user_greatings">
+      <h1>Hello {{ user.username }}!</h1>
+    </div>
+  
+    <div class="container">
+      <div class="row user_header">
+        <div class="col-sm-4">
+            <div class="fos_user_user_show">
+                <p><b>{{ 'profile.show.username'|trans }}</b>: {{ user.username }} | <a class="fas fa-wrench" href="{{ path('change_passwd') }}"> Change Password</a></p>
             </div>
         </div>
-
+        
+        <div class="col-sm-4">
+          <p><b>Your roles:</b> |
+          {% for role in user.roles %}
+            {{ role }} |
+          {% endfor %}
+        </p>
+        </div>
+  
+        <div class="col-sm-4">
+            <p><b>{{ 'profile.show.email'|trans }}</b>: {{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="user_content">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Wykłady</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">
+                        $0 <small class="text-muted">/ mo</small>
+                    </h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Matematyka</li>
+                        <li>PSIAI</li>
+                        <li>Geoinformatyka</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-success">
+                        Wybierz Wykład
+                    </button>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Pliki</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">
+                        $0 <small class="text-muted">/ mo</small>
+                    </h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Matematyka</li>
+                        <li>PSIAI</li>
+                        <li>Geoinformatyka</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-success">
+                        Wybierz Plik
+                    </button>
+                </div>
+            </div>
+    
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Kursy</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">
+                        $0 <small class="text-muted">/ mo</small>
+                    </h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Matematyka</li>
+                        <li>PSIAI</li>
+                        <li>Geoinformatyka</li>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-success">
+                        Wybierz Kurs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <footer>
+        <div class="footer-copyright text-center py-3">
+            © 2018 Copyright: Paweł Kalicki
+        </div>
+      </footer>
     </div>
 </div>

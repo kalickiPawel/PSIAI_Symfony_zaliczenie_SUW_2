@@ -7,19 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
-/**
- * User controller.
- *
- * @Route("user")
- */
 class UserController extends Controller
 {
-    /**
-     * Lists all user entities.
-     *
-     * @Route("/", name="user_index")
-     * @Method("GET")
-     */
+
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -57,19 +47,21 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a user entity.
-     *
-     * @Route("/{id}", name="user_show")
-     * @Method("GET")
-     */
-    public function showAction(User $user)
+    public function showUserAction(User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
 
         return $this->render('user/show.html.twig', array(
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    public function showAdminAction()
+    {
+        $user = $this->getUser();
+        return $this->render('admin_profile/index.html.twig', array(
+            'user' => $user,
         ));
     }
 

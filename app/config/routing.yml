@@ -4,20 +4,36 @@ app:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-home:
+homepage:
     path: '/'
-user_home:
-    path: '/profile'
+    defaults: { _controller: AppBundle:Default:index }
+
+user_list:
+    path: '/user-list'
+    defaults: { _controller: AppBundle:User:index }
+    methods: [GET]
+
 admin_home:
     path: '/admin'
+    defaults: { _controller: AppBundle:User:showAdmin }
+user_home:
+    path: '/profile'
+
+user_show:
+    path: '/user/{id}'
+    defaults: { _controller: AppBundle:User:showUser }
+    methods: [GET]
+    requirements:
+        id: '\d+'
 
 login:
     path: '/login'
 register:
     path: '/register'
-
 change_passwd:
     path: '/profile/change-password'
-
 app_lecture_list:
     path: '/lecture'
+app_lecture_new:
+    path: '/lecture/new'
+    defaults: { _controller: AppBundle:Lecture:new }

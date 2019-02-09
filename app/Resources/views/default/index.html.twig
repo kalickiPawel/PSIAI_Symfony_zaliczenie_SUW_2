@@ -1,12 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div class="container">
-            <div id="welcome">
-                <h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
-                <a href="{{ path('login') }}">Login</a>
-                <a href="{{ path('register') }}">Register</a>
+    <div class="jumbotron text-center">
+        <h1><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
+        <h6><span>SUW 2.0</span></h6>
+        <a class="btn btn-primary" href="{{ path('login') }}">Login</a>
+        <a class="btn btn-success" href="{{ path('register') }}">Register</a>
+    </div>
+    
+    <div class="index_content">
+        <span class="text-center"><h4>Statystyki</h4>
+            <h6>(Ilość pobrań wykładów)</h6></span>
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Roczne</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">
+                        {{ downloads.years }}
+                    </h1>
+                </div>
+            </div>
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Miesięczne</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">
+                        {{ downloads.months }}
+                    </h1>
+                </div>
+            </div>
+    
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Dzienne</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">
+                        {{ downloads.days}}
+                    </h1>
+                </div>
             </div>
         </div>
     </div>

@@ -12,9 +12,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class LectureController extends Controller
 {
-    /**
-     * @Route("/lecture/new", name="app_lecture_new")
-     */
     public function newAction(Request $request)
     {
         $lecture = new Lecture();
