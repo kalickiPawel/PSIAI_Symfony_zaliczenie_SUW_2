@@ -10,6 +10,9 @@ What's inside?
 The SUW 2.0 is configured with the following defaults:
 
   * FOS User;
+  * CRUD Users;
+  * CRUD Lectures;
+  * Upload Files;
 
 All libraries and bundles included in the Symfony Standard Edition are released under the MIT or BSD license.
 
