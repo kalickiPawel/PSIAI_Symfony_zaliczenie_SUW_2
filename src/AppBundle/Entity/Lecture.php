@@ -30,9 +30,9 @@ class Lecture
     private $name;
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="access", type="boolean")
+     * @ORM\Column(name="access", type="integer", nullable=true)
      */
     private $access;
 
@@ -45,13 +45,6 @@ class Lecture
      * @Assert\File(maxSize="6000000")
      */
     private $lectureFile;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="path", type="string", length=255)
-     */
-    public $path;
 
 
     /**
@@ -91,7 +84,7 @@ class Lecture
     /**
      * Set access
      *
-     * @param boolean $access
+     * @param int $access
      *
      * @return Lecture
      */
@@ -105,7 +98,7 @@ class Lecture
     /**
      * Get access
      *
-     * @return bool
+     * @return int
      */
     public function getAccess()
     {
@@ -115,10 +108,10 @@ class Lecture
     /**
      * Set lectureFile
      *
-     * @param UploadedFile $lectureFile
+     * @param string $lectureFile
 
      */
-    public function setLectureFile(UploadedFile $lectureFile = null)
+    public function setLectureFile($lectureFile)
     {
         $this->lectureFile = $lectureFile;
     }
@@ -126,39 +119,10 @@ class Lecture
     /**
      * Get lectureFile
      *
-     * @return UploadedFile
+     * @return string
      */
     public function getLectureFile()
     {
         return $this->lectureFile;
     }
-
-    public function getAbsolutePath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadRootDir().'/'.$this->path;
-    }
-
-    public function getWebPath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadDir().'/'.$this->path;
-    }
-
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads/documents';
-    }
 }
-

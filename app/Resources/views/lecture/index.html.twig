@@ -2,48 +2,54 @@
     ? './admin_profile/index.html.twig'
     : './user_profile/index.html.twig'%}
 {% block lecture %}
-
-    <h1>Lectures list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                {% if is_granted('ROLE_ADMIN') %}
-                <th>Id</th>
-                {% endif %}
-                <th>Name</th>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <th>Access</th>
-                    <th>Lecturefile</th>
-                    <th>Path</th>
-                    <th>Actions</th>
-                {% endif %}
-                <th>Downloads</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for lecture in lectures %}
-                <tr>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <td><a href="{{ path('lecture_show', { 'id': lecture.id }) }}">{{ lecture.id }}</a></td>
-                    {% endif %}
-                    <td>{{ lecture.name }}</td>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <td>{% if lecture.access %}Yes{% else %}No{% endif %}</td>
-                        <td>{{ lecture.lectureFile }}</td>
-                        <td>{{ lecture.path }}</td>
-                        <td>
-                            <a href="{{ path('lecture_edit', { 'id': lecture.id }) }}">edit</a>
-                        </td>
-                    {% endif %}
-                    <td>
-                        <a href="{{ path('lecture_download', { 'id': lecture.id }) }}">download</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h4>Lectures list</h4>
+            <table class="lectures">
+                <thead>
+                    <tr>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <th>Id</th>
+                        {% endif %}
+                        <th>Name</th>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <th>Access</th>
+                            <th>Lecturefile</th>
+                            {#<th>Path</th>#}
+                            <th>Actions</th>
+                        {% endif %}
+                        <th>Downloads</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lecture in lectures %}
+                        <tr>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>{{ lecture.id }}</td>
+                            {% endif %}
+                            <td>{{ lecture.name }}</td>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <td>{% if lecture.access %}Yes{% else %}No{% endif %}</td>
+                                <td>{{ lecture.lectureFile }}</td>
+                                {#<td> lecture.path </td>#}
+                                <td>
+                                    {#<a class="btn btn-secondary" href="{{ path('lecture_edit', { 'id': lecture.id }) }}">edit</a>
+                                    do poprawki przycisk, zeby dzialal#}
+                                    <a class="btn btn-danger" href="{{ path('lecture_delete', { 'id': lecture.id }) }}">delete</a>
+                                </td>
+                            {% endif %}
+                            <td>
+                                {#<a href="{{ path('lecture_download', { 'id': lecture.id }) }}">download</a>#}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     {% if is_granted('ROLE_ADMIN') %}
         <a class="btn btn-primary" href="{{ path('lecture_new') }}">Create a new lecture</a>
     {% endif%}
+</div>
 {% endblock %}

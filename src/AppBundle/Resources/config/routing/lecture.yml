@@ -21,4 +21,4 @@ lecture_edit:
 lecture_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Lecture:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]

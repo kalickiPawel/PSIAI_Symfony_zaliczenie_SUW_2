@@ -19,7 +19,6 @@ class LectureType extends AbstractType
         ->add('name')
         #->add('access')
         ->add('lectureFile', FileType::class, array('label' => 'Lecture (PDF file)'))
-        #->add('path')
         ;
     }
     /**
