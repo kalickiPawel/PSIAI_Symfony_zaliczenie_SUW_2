@@ -12,21 +12,18 @@ class UserController extends Controller
 
     public function indexAction()
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('AppBundle:User')->findAll();
-
+        
+        
         return $this->render('user/index.html.twig', array(
             'users' => $users,
+            'profile' => $user
         ));
     }
 
-    /**
-     * Creates a new user entity.
-     *
-     * @Route("/new", name="user_new")
-     * @Method({"GET", "POST"})
-     */
     public function newAction(Request $request)
     {
         $user = new User();
@@ -39,15 +36,16 @@ class UserController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
+
         }
 
         return $this->render('user/new.html.twig', array(
-            'user' => $user,
+            'profile' => $user,
             'form' => $form->createView(),
         ));
     }
 
-    public function showUserAction(User $user)
+    public function showUserAccountAction(User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
 
@@ -57,22 +55,26 @@ class UserController extends Controller
         ));
     }
 
+    public function showUserAction()
+    {
+        $user = $this->getUser();
+        return $this->render('user_profile/index.html.twig', array(
+            'profile' => $user,
+        ));
+    }
     public function showAdminAction()
     {
         $user = $this->getUser();
         return $this->render('admin_profile/index.html.twig', array(
-            'user' => $user,
+            'profile' => $user,
         ));
     }
 
-    /**
-     * Displays a form to edit an existing user entity.
-     *
-     * @Route("/{id}/edit", name="user_edit")
-     * @Method({"GET", "POST"})
-     */
     public function editAction(Request $request, User $user)
     {
+        $profile = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $lectures = $em->getRepository('AppBundle:Lecture')->findAll();
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -84,18 +86,14 @@ class UserController extends Controller
         }
 
         return $this->render('user/edit.html.twig', array(
+            'lectures' => $lectures,
+            'profile' => $profile,
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
-    /**
-     * Deletes a user entity.
-     *
-     * @Route("/{id}", name="user_delete")
-     * @Method("DELETE")
-     */
     public function deleteAction(Request $request, User $user)
     {
         $form = $this->createDeleteForm($user);

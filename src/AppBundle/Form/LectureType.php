@@ -10,17 +10,36 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class LectureType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lectureFile', FileType::class, array('label' => 'Lecture (PDF file)'))
+        ->add('name')
+        #->add('access')
+        ->add('lectureFile', FileType::class, array('label' => 'Lecture (PDF file)'))
+        #->add('path')
         ;
     }
-
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Lecture::class,
+            'data_class' => Lecture::class
+            #'data_class' => 'AppBundle\Entity\Lecture'
         ));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'appbundle_lecture';
+    }
+
+
 }

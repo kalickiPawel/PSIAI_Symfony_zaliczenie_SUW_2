@@ -1,0 +1,24 @@
+lecture_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Lecture:index" }
+    methods:  GET
+
+lecture_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Lecture:show" }
+    methods:  GET
+
+lecture_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Lecture:new" }
+    methods:  [GET, POST]
+
+lecture_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Lecture:edit" }
+    methods:  [GET, POST]
+
+lecture_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Lecture:delete" }
+    methods:  DELETE

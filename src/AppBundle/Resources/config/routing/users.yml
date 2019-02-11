@@ -1,0 +1,28 @@
+admin_home:
+  path: '/admin'
+  defaults: { _controller: AppBundle:User:showAdmin }
+user_home:
+  path: '/user'
+  defaults: { _controller: AppBundle:User:showUser }
+user_index:
+  path: '/user-list'
+  defaults: { _controller: AppBundle:User:index }
+  methods: [GET]
+user_show:
+  path: '/user/{id}'
+  defaults: { _controller: AppBundle:User:showUserAccount }
+  methods: [GET]
+  requirements:
+    id: '\d+'
+user_edit:
+  path: '/{id}/edit'
+  defaults: { _controller: AppBundle:User:edit }
+  methods: [GET, POST]  
+user_new:
+  path: '/new'
+  defaults: { _controller: AppBundle:User:new }
+  methods: [GET, POST]
+user_delete:
+  path: '/{id}'
+  defaults: { _controller: AppBundle:User:delete }
+  methods: [DELETE]

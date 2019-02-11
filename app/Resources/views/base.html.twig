@@ -31,16 +31,13 @@
                     <a class="fas fa-home home" href="{{ path('homepage') }}"></a>
                 {% endif %}
             </div>
-            <div>   
                 {% block body %}{% endblock %}
                 {% block javascripts %}{% endblock %}
-
-                <footer>
-                    <div class="footer-copyright text-center py-3">
-                        © 2019 Copyright: Paweł Kalicki
-                    </div>
-                </footer>
-            </div>
+            <footer>
+                <div class="footer-copyright text-center py-3">
+                    © 2019 Copyright: Paweł Kalicki
+                </div>
+             </footer>
         </div>
     </body>
 </html>

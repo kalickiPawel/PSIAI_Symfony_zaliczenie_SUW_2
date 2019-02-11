@@ -1,13 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends './admin_profile/index.html.twig' %}
+{% block lecture %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h4>Lecture creation</h4>
 
-{% block body %}
-<h1>Adding a new lecture</h1>
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input class="btn btn-primary" type="submit" value="Create" />
+            {{ form_end(form) }}
 
-{{ form_start(form) }}
-    {# ... #}
+            <a href="{{ path('lecture_index') }}" class="btn btn-danger">Back to the list</a>
 
-    {{ form_row(form.lectureFile) }}
-    <input type="submit" class="btn float-left login_btn" />
-{{ form_end(form) }}
-
+        </div>
+        <div class="col-sm"></div>
+        <div class="col-sm"></div>
+    </div>
+</div>
 {% endblock %}

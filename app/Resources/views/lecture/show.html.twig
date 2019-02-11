@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Lecture</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lecture.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ lecture.name }}</td>
+            </tr>
+            <tr>
+                <th>Access</th>
+                <td>{% if lecture.access %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Lecturefile</th>
+                <td>{{ lecture.lectureFile }}</td>
+            </tr>
+            <tr>
+                <th>Path</th>
+                <td>{{ lecture.path }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('lecture_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('lecture_edit', { 'id': lecture.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

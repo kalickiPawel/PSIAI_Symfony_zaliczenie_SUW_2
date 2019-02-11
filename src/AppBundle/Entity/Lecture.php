@@ -42,8 +42,16 @@ class Lecture
      * @ORM\Column(name="lectureFile", type="string", length=255)
      * @Assert\NotBlank(message="Please, upload the lecture File as a PDF file.")
      * @Assert\File(mimeTypes={ "application/pdf" })
+     * @Assert\File(maxSize="6000000")
      */
     private $lectureFile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255)
+     */
+    public $path;
 
 
     /**
@@ -107,25 +115,50 @@ class Lecture
     /**
      * Set lectureFile
      *
-     * @param string $lectureFile
-     *
-     * @return Lecture
+     * @param UploadedFile $lectureFile
+
      */
-    public function setLectureFile($lectureFile)
+    public function setLectureFile(UploadedFile $lectureFile = null)
     {
         $this->lectureFile = $lectureFile;
-
-        return $this;
     }
 
     /**
      * Get lectureFile
      *
-     * @return string
+     * @return UploadedFile
      */
     public function getLectureFile()
     {
         return $this->lectureFile;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/'.$this->path;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/documents';
     }
 }
 
