@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use AppBundle\Entity\Lecture;
 use AppBundle\Entity\User;
 use AppBundle\Form\LectureType;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 
 /**
@@ -147,6 +149,23 @@ class LectureController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('lecture_index');
+    }
+
+    /**
+     * Download a lecture file.
+     *
+     */
+    public function downloadAction(Request $request, String $name, String $lectureName)
+    {
+        $user = $this->getUser();
+        $timestamp = time();
+        $date = date("h.i.s", $timestamp);
+        $file_with_path = $this->container->getParameter ( 'lectures_directory' ) . "/" . $name;
+        $response = new BinaryFileResponse ( $file_with_path );
+        $response->headers->set ( 'Content-Type', 'application/pdf' );
+        $fileName = $date.'_'.$lectureName.'.pdf';
+        $response->setContentDisposition ( ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName );
+        return $response;
     }
 
     /**

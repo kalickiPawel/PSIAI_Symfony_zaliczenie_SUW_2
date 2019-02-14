@@ -22,3 +22,8 @@ lecture_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Lecture:delete" }
     methods:  [GET, DELETE]
+
+lecture_download:
+    path: /{name}/{lectureName}/download
+    defaults: { _controller: "AppBundle:Lecture:download" }
+    methods: [GET]
