@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
+use AppBundle\Entity\Stats;
 use AppBundle\Entity\Lecture;
 use AppBundle\Entity\User;
 use AppBundle\Form\LectureType;
@@ -157,13 +158,28 @@ class LectureController extends Controller
      */
     public function downloadAction(Request $request, String $name, String $lectureName)
     {
+        
         $user = $this->getUser();
+
         $timestamp = time();
-        $date = date("h.i.s", $timestamp);
+        $date = new \DateTime("now");
+        #$date = date("Y-m-d h:i:s", $timestamp);
+
         $file_with_path = $this->container->getParameter ( 'lectures_directory' ) . "/" . $name;
+
+        # dodanie rekordu do bazy statystyk
+        $em = $this->getDoctrine()->getManager();
+        $stats = new Stats();
+        $stats->setNameUser($user->getUsername());
+        $stats->setNameLecture($lectureName);
+        $stats->setDateTime($date);
+        $em->persist($stats);
+        $em->flush();
+
+        # obsługa pobierania pliku
         $response = new BinaryFileResponse ( $file_with_path );
         $response->headers->set ( 'Content-Type', 'application/pdf' );
-        $fileName = $date.'_'.$lectureName.'.pdf';
+        $fileName = $lectureName.'.pdf';
         $response->setContentDisposition ( ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName );
         return $response;
     }
