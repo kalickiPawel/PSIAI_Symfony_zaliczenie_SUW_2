@@ -12,9 +12,17 @@ fos_user:
 app_users:
     resource: "@AppBundle/Resources/config/routing/users.yml"
 
-app_lecture:
+app_courses:
+    resource: "@AppBundle/Resources/config/routing/course.yml"
+    prefix: /course
+
+app_lectures:
     resource: "@AppBundle/Resources/config/routing/lecture.yml"
     prefix:   /lecture
+
+app_stats:
+    resource: "@AppBundle/Resources/config/routing/stats.yml"
+    prefix: /stats
 
 login:
     path: '/login'

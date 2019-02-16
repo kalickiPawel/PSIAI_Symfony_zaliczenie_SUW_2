@@ -30,11 +30,11 @@ class Lecture
     private $name;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="access", type="integer", nullable=true)
+     * @ORM\Column(name="course", type="string", length=255)
      */
-    private $access;
+    private $course;
 
     /**
      * @var string
@@ -82,27 +82,24 @@ class Lecture
     }
 
     /**
-     * Set access
+     * Set course
      *
-     * @param int $access
-     *
-     * @return Lecture
-     */
-    public function setAccess($access)
-    {
-        $this->access = $access;
+     * @param string $course
 
-        return $this;
+     */
+    public function setCourse($course)
+    {
+        $this->course = $course;
     }
 
     /**
-     * Get access
+     * Get course
      *
-     * @return int
+     * @return string
      */
-    public function getAccess()
+    public function getCourse()
     {
-        return $this->access;
+        return $this->course;
     }
 
     /**

@@ -12,11 +12,12 @@
                         {% if is_granted('ROLE_ADMIN') %}
                         <th>Id</th>
                         {% endif %}
+                        <th>Course</th>
                         <th>Name</th>
                         {% if is_granted('ROLE_ADMIN') %}
-                            {#<th>Access</th>#}
                             <th>Lecturefile</th>
-                            {#<th>Path</th>#}
+                            <th>Actions</th>
+                        {% else %}
                             <th>Actions</th>
                         {% endif %}
                     </tr>
@@ -27,20 +28,19 @@
                             {% if is_granted('ROLE_ADMIN') %}
                                 <td>{{ lecture.id }}</td>
                             {% endif %}
+                            <td>{{ lecture.course }}</td>
                             <td>{{ lecture.name }}</td>
                             {% if is_granted('ROLE_ADMIN') %}
-                                {#<td>{% if lecture.access %}Yes{% else %}No{% endif %}</td>#}
                                 <td><a href="{{ path('lecture_download', { 'name': lecture.lectureFile, 'lectureName': lecture.name }) }}">{{ lecture.lectureFile }}</a></td>
-                                {#<td> lecture.path </td>#}
                                 <td>
-                                    {#<a class="btn btn-secondary" href="{{ path('lecture_edit', { 'id': lecture.id }) }}">edit</a>
-                                    do poprawki przycisk, zeby dzialal#}
+                                    {#<a class="btn btn-secondary" href="{{ path('lecture_edit', { 'id': lecture.id }) }}">edit</a>#}
                                     <a class="btn btn-danger" href="{{ path('lecture_delete', { 'id': lecture.id }) }}">delete</a>
                                 </td>
+                            {% else %}
+                                <td>
+                                    <a class="btn btn-primary" href="{{ path('lecture_download', { 'name': lecture.lectureFile, 'lectureName': lecture.name }) }}">download</a>
+                                </td>
                             {% endif %}
-                            <td>
-                                {#<a href="{{ path('lecture_download', { 'id': lecture.id }) }}">download</a>#}
-                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

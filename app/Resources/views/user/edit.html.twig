@@ -7,7 +7,7 @@
     <table class="lectures">
         <thead>
             <tr>
-                <th>Category</th>
+                <th>Course</th>
                 <th>Name</th>
                 <th>Access</th>
             </tr>
@@ -16,18 +16,19 @@
         {{ form_start(edit_form) }}
         {% for lecture in lectures %}
             <tr>
-                <td></td>
+                <td>{{ lecture.course }}</td>
                 <td>{{ lecture.name }}</td>
                 <td>
                     {# form_widget(access) #}
                     {# user.id #}
+                    
+                    {{ form_widget(edit_form) }}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     <p>
-        {{ form_widget(edit_form) }}
         <input class="btn btn-primary" type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
