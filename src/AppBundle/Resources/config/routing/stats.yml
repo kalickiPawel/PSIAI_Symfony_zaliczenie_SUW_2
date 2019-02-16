@@ -1,0 +1,4 @@
+stats_index:
+    path: /
+    defaults: { _controller: "AppBundle:Stats:index" }
+    methods: [GET]

@@ -1,0 +1,29 @@
+{% extends './admin_profile/index.html.twig' %}
+{% block stats %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h4>Downloads list</h4>
+            <table class="stats">
+                <thead>
+                    <tr>
+                        <th>Lecture</th>
+                        <th>Username</th>
+                        <th>DataTime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                        <tr>
+                                
+                            <td>{{ log.nameLecture }}</td>
+                            <td>{{ log.nameUser }}</td>
+                            <td>{{ log.dateTime | date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
