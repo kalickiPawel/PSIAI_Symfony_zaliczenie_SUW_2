@@ -76,7 +76,6 @@ class UserController extends Controller
         $profile = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $lectures = $em->getRepository('AppBundle:Lecture')->findAll();
-        $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
 
@@ -91,7 +90,6 @@ class UserController extends Controller
             'profile' => $profile,
             'user' => $user,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
