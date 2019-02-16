@@ -1,0 +1,33 @@
+{% extends './admin_profile/index.html.twig' %}
+{% block lecture %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h4>Courses list</h4>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for course in courses %}
+                    <tr>
+                        <td>{{ course.id }}</td>
+                        <td>{{ course.name }}</td>
+                        <td>
+                            <a class="btn btn-secondary" href="{{ path('course_edit', { 'id': course.id }) }}">edit</a>
+                            <a class="btn btn-danger" href="{{ path('course_delete', { 'id': course.id }) }}">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-primary" href="{{ path('course_new') }}">Create a new course</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

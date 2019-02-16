@@ -1,0 +1,24 @@
+course_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Course:index" }
+    methods:  GET
+    
+course_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Course:new" }
+    methods:  [GET, POST]
+
+course_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Course:show" }
+    methods:  GET
+
+course_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Course:edit" }
+    methods:  [GET, POST]
+
+course_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Course:delete" }
+    methods:  [GET, DELETE]

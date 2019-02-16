@@ -1,0 +1,19 @@
+{% extends './admin_profile/index.html.twig' %}
+{% block course %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h4>Course creation</h4>
+
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <input class="btn btn-primary" type="submit" value="Create" />
+            {{ form_end(form) }}
+
+            <a href="{{ path('course_index') }}" class="btn btn-danger">Back to the list</a>
+        </div>
+        <div class="col-sm"></div>
+        <div class="col-sm"></div>
+    </div>
+</div>
+{% endblock %}
