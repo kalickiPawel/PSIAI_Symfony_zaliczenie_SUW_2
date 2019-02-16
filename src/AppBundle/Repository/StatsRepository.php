@@ -10,4 +10,56 @@ namespace AppBundle\Repository;
  */
 class StatsRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return int
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function countDayDownloads()
+    {
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
+        $day = date('d');
+        $qb = $this->createQueryBuilder('d')
+            ->where('DAY(d.dateTime) = :day') # to zmienilem
+            ->orderBy('d.id', 'asc')
+            ->setParameter('day', $day)
+            ->getQuery();
+        $dayDownloads = $qb->getResult();
+        return count($dayDownloads);
+    }
+    /**
+     * @return int
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function countMonthDownloads()
+    {
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
+        $month = date('m');
+        $qb = $this->createQueryBuilder('m')
+            ->where('MONTH(m.dateTime) = :month')
+            ->orderBy('m.id', 'asc')
+            ->setParameter('month', $month)
+            ->getQuery();
+        $monthDownloads = $qb->getResult();
+        return count($monthDownloads);
+    }
+
+    /**
+     * @return int
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function countYearDownloads()
+    {
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
+        $year = date('Y');
+        $qb = $this->createQueryBuilder('y')
+            ->where('YEAR(y.dateTime) = :year')
+            ->orderBy('y.id', 'asc')
+            ->setParameter('year', $year)
+            ->getQuery();
+        $YearDownloads = $qb->getResult();
+        return count($YearDownloads);
+    }
 }

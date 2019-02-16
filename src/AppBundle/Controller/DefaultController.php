@@ -12,9 +12,9 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $downloads = array(
-            "years" => 0,
-            "months" => 0,
-            "days" => 0,
+            "years" => $this->getDoctrine()->getRepository('AppBundle:Stats')->countYearDownloads(),
+            "months" => $this->getDoctrine()->getRepository('AppBundle:Stats')->countMonthDownloads(),
+            "days" => $this->getDoctrine()->getRepository('AppBundle:Stats')->countDayDownloads(),
         );
         return $this->render('default/index.html.twig', array(
             'downloads' => $downloads,
