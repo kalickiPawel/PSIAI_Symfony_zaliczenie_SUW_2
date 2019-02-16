@@ -30,11 +30,15 @@
         </div>
 
         <div class="admin_content">
+            <a href="{{ path('course_index') }}" class="btn btn-success">Zarządzaj kursami</a>
             <a href="{{ path('lecture_index') }}" class="btn btn-success">Zarządzaj wykładami</a>
             <a href="{{ path('user_index') }}" class="btn btn-success">Zarządzaj uzytkownikami</a>
+            <a href="{{ path('stats_index') }}" class="btn btn-success">Logi pobrań</a>
             <p></p>
+            {% block course %}{% endblock %}
             {% block lecture %}{% endblock %}
             {% block users %}{% endblock %}
+            {% block stats %}{% endblock %}
         </div>
 
 {% endblock %}
