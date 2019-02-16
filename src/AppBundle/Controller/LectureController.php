@@ -54,7 +54,7 @@ class LectureController extends Controller
             $em = $this->getDoctrine()->getManager();
             $file = $lecture->getLectureFile();
             $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
-
+            
             // Move the file to the directory where brochures are stored
             try {
                 $file->move(
@@ -109,20 +109,40 @@ class LectureController extends Controller
      */
     public function editAction(Request $request, Lecture $lecture)
     {
-        $deleteForm = $this->createDeleteForm($lecture);
-        $editForm = $this->createForm('AppBundle\Form\LectureType', $lecture);
+        $editForm = $this->createForm(LectureType::class, $lecture);
         $editForm->handleRequest($request);
-
+/*
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('lecture_edit', array('id' => $lecture->getId()));
         }
+*/
+        if ($editform->isSubmitted() && $editform->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $file = $lecture->getLectureFile();
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
 
+            // Move the file to the directory where brochures are stored
+            try {
+                $file->move(
+                    $this->getParameter('lectures_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+            #$fileName = $fileUploader->upload($file);
+            $lecture->setLectureFile($fileName);
+
+            $em->persist($lecture);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('lecture_index'));
+        }
         return $this->render('lecture/edit.html.twig', array(
             'lecture' => $lecture,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
