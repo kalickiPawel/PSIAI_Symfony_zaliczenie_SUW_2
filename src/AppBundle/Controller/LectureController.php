@@ -14,6 +14,9 @@ use AppBundle\Form\LectureType;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+#use setasign\Fpdi\Fpdi;
+#require_once('fpdf/fpdf.php');
+#require_once('fpdf2/src/autoload.php');
 
 /**
  * Lecture controller.
@@ -153,7 +156,7 @@ class LectureController extends Controller
     public function deleteAction(Request $request, Lecture $lecture)
     {
         /* 
-        Dopisać obsługę usuwania pliku z katalogu
+        usuwanie pliku z katalogu!
 
         $file = $lecture->getLectureFile();
         $fileName = sha1(uniqid(mt_rand(), true)).'.'.$file->guessExtension();
@@ -196,7 +199,35 @@ class LectureController extends Controller
         $em->persist($stats);
         $em->flush();
 
-        # obsługa pobierania pliku
+    /*
+        # Pobieranie oznakowanego pliku
+        // initiate FPDI
+        $pdf = new Fpdi();
+        // add a page
+        $pdf->AddPage();
+        // set the source file
+        $pdf->setSourceFile($file_with_path);
+        // import page 1
+        $tplIdx = $pdf->importPage(1);
+        // use the imported page and place it at position 10,10 with a width of 100 mm
+        $pdf->useTemplate($tplIdx, 10, 10, 100);
+
+        // now write some text above the imported page
+        $pdf->SetFont('Helvetica');
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(30, 30);
+        $pdf->Write(0, 
+            'Plik został pobrany przez: '.$user->getUsername().' '.
+            'W czasie: '.$date.' '.
+            'Pierwotna nazwa wykładu to: '.$lectureName
+        );
+
+        return new Response($pdf->Output(), 200, array(
+            'Content-Type' => 'application/pdf'));
+        
+    */
+    
+        # obsługa pobierania zwykłego pliku
         $response = new BinaryFileResponse ( $file_with_path );
         $response->headers->set ( 'Content-Type', 'application/pdf' );
         $fileName = $lectureName.'.pdf';
