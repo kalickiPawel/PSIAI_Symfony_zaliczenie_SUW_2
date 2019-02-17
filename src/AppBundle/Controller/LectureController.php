@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
 use AppBundle\Entity\Stats;
 use AppBundle\Entity\Lecture;
@@ -13,8 +14,8 @@ use AppBundle\Entity\User;
 use AppBundle\Form\LectureType;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use setasign\Fpdi\Fpdi;
 
-#use setasign\Fpdi\Fpdi;
 #require_once('fpdf/fpdf.php');
 #require_once('fpdf2/src/autoload.php');
 
@@ -199,7 +200,7 @@ class LectureController extends Controller
         $em->persist($stats);
         $em->flush();
 
-    /*
+    
         # Pobieranie oznakowanego pliku
         // initiate FPDI
         $pdf = new Fpdi();
@@ -217,22 +218,23 @@ class LectureController extends Controller
         $pdf->SetTextColor(255, 0, 0);
         $pdf->SetXY(30, 30);
         $pdf->Write(0, 
-            'Plik został pobrany przez: '.$user->getUsername().' '.
-            'W czasie: '.$date.' '.
-            'Pierwotna nazwa wykładu to: '.$lectureName
+            'User: '.$user->getUsername().' '.
+            'Time: '.$date->format('Y-m-d H:i:s').' '.
+            'Name: '.$lectureName
         );
 
         return new Response($pdf->Output(), 200, array(
             'Content-Type' => 'application/pdf'));
         
-    */
     
+    /*
         # obsługa pobierania zwykłego pliku
         $response = new BinaryFileResponse ( $file_with_path );
         $response->headers->set ( 'Content-Type', 'application/pdf' );
         $fileName = $lectureName.'.pdf';
         $response->setContentDisposition ( ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName );
         return $response;
+    */
     }
 
     /**
